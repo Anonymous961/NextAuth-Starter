@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 14 Starter with NextAuth
+
+This is a **Next.js 14** starter project with **NextAuth** integrated, featuring authentication via **Google** and **GitHub** providers.
+
+## Features
+
+- Next.js 14+
+- NextAuth.js for authentication
+- Google and GitHub OAuth providers
+- Easy environment variable-based configuration
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Set up environment variables
+
+Copy the `.env.example` file to create a new `.env` file:
+
+```bash
+cp .env.example .env
+```
+
+Update the `.env` file with your credentials for Google and GitHub OAuth:
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+
+# Google OAuth credentials
+NEXT_GOOGLE_CLIENT_ID=your-google-client-id
+NEXT_GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# GitHub OAuth credentials
+NEXT_GITHUB_CLIENT_ID=your-github-client-id
+NEXT_GITHUB_CLIENT_SECRET=your-github-client-secret
+
+# NextAuth secret for JWT and session handling (you can generate one using `openssl rand -base64 32`)
+NEXTAUTH_SECRET=your-random-secret
+```
+
+### 4. Run the development server
+
+After setting up the environment variables, start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Your application will be running at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 5. Authentication Providers
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To use Google and GitHub OAuth:
 
-## Learn More
+- **Google:** Set up an OAuth app in the [Google Developer Console](https://console.developers.google.com/).
+- **GitHub:** Create an OAuth app in [GitHub Developer Settings](https://github.com/settings/developers).
 
-To learn more about Next.js, take a look at the following resources:
+Ensure your OAuth redirect URLs are set to:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Google:** `http://localhost:3000/api/auth/callback/google`
+- **GitHub:** `http://localhost:3000/`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+- **app/** (Next.js 14's new App Router)
+  - `page.tsx`: Home page
+  - `api/auth/[...nextauth]/route.ts`: NextAuth configuration
+- **components/**
+  - `Navbar.tsx`: Example navigation component
+- **styles/**
+  - `globals.css`: Global CSS styles
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+We welcome contributions! If you're interested in improving this project, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/my-feature`).
+3. Make your changes and commit them (`git commit -m 'Add my feature'`).
+4. Push your branch (`git push origin feature/my-feature`).
+5. Open a pull request.
+
+### Feature Requests & Bugs
+
+If you have a new feature request or encounter a bug, feel free to open an issue on this repository. We appreciate your feedback and contributions to make this project better.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
